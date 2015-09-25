@@ -1,0 +1,56 @@
+  <form class="form-inline" name="inputForm" id="inputForm" novalidate>
+  <input type="text" class="form-control" id="orderName" placeholder="Order name" ng-model="orderName" required>
+  <input type="text" class="form-control" id="orderAmount" placeholder="Amount" ng-model="orderAmount" required >
+  <input type="text" class="form-control" id="customerName" placeholder="Customer name" ng-model="customerName" required>
+  <button type="submit" class="btn btn-default" ng-click="addOrder()" ng-disabled="inputForm.$pristine || inputForm.$dirty && inputForm.$invalid">Add order</button>
+</form>
+
+<form class="form-inline" id="searchForm">
+  <input type="text" class="form-control" id="searchText" placeholder="Search order" ng-model="searchText">
+</form>
+
+<div data-example-id="hoverable-table">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th ng-click="sortField='orderID'; reverseSort = !reverseSort"> <span>ID</span> </th>
+          <th ng-click="sortField='orderName'; reverseSort = !reverseSort"> <span>Order</span> </th>
+          <th ng-click="sortField='orderAmount'; reverseSort = !reverseSort"> <span>Amount</span> </th>
+          <th ng-click="sortField='customerName'; reverseSort = !reverseSort"> <span>Owner</span> </th>
+          <th ng-click="sortField='createDate'; reverseSort = !reverseSort"> <span>Created</span> </th>
+          <th ng-click="sortField='orderStatus'; reverseSort = !reverseSort"> <span>Status</span> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-if='!editMode' ng-repeat="order in orders | orderBy: sortField: reverseSort | filter: searchText">
+          <th scope="row"> {{order.orderID}} </th>
+          <td> {{order.orderName}} </td>
+          <td> {{order.orderAmount}} </td>
+          <td> {{order.customerName}} </td>
+          <td> {{order.createDate}} </td>
+          <td> {{order.orderStatus}} </td>
+        </a>
+        </tr>
+        <tr ng-if='editMode' ng-repeat="order in orders | orderBy: sortField: reverseSort | filter: searchText">
+          <th scope="row"> {{order.orderID}} </th>
+          <td><input type="text" class="form-control" id="orderName" placeholder="Order name" ng-model="order.orderName"></td>
+          <td><input type="text" class="form-control" id="orderName" placeholder="Order name" ng-model="order.orderAmount"></td>
+          <td><input type="text" class="form-control" id="orderName" placeholder="Order name" ng-model="order.customerName"></td>
+          <td> {{order.createDate}} </td>
+          <td><select id="orderStatus" ng-model="order.orderStatus">
+              <option value='new'>New</option>
+              <option value='canceled'>Canceled</option> 
+              <option value='delivered'>Delivered</option> 
+            </select>
+          </td>
+          <td>
+            <i class="glyphicon glyphicon-remove" id="deleteButton" ng-click="removeOrder(order.orderID)"> </i> 
+          </td>
+        </a>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-default" ng-click="editMode = true">Edit</button>
+    <button class="btn btn-default" ng-click="save()">Save</button>
+    <button class="btn btn-default" ng-click="removeOrders()">Clear all</button>
+  </div>
