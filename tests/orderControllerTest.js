@@ -1,10 +1,9 @@
 describe('orderController test: ', function() {
 	var controller,
-		mockScope = {},
-		_storageService;
+		mockScope = {};
 
 	beforeEach(function() {
-		angular.mock.module('orderApp'); 
+		angular.mock.module('orderApp');
 		angular.mock.inject(function($controller, $rootScope, storageService) {
 			mockScope = $rootScope.$new();
 			controller = $controller('orderController', {
@@ -21,8 +20,8 @@ describe('orderController test: ', function() {
 	it("Adding of order", function() {
 		mockScope.orders = [];
 		mockScope.orderName = 'order';
-	    mockScope.orderAmount = 'amount';
-	    mockScope.customerName = 'name';
+		mockScope.orderAmount = 'amount';
+		mockScope.customerName = 'name';
 		mockScope.addOrder();
 		expect(mockScope.orders.length).toEqual(1);
 	});
